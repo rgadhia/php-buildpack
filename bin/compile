@@ -73,7 +73,9 @@ mkdir memcached_dir
 cd memcached_dir
 curl http://www.memcached.org/files/memcached-1.4.21.tar.gz -o memcached-1.4.21.tar.gz -L --fail
 tar -xvzf memcached-1.4.21.tar.gz
-cd ..
+cd memcached-1.4.21/
+./configure >& ../log.memcached_configure
+cd ../..
 
 
 json_empty=true
