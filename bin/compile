@@ -65,6 +65,17 @@ S3_URL="https://lang-php.s3.amazonaws.com/dist-${S3_URL}"
 
 cd $BUILD_DIR
 
+notice "Build Dir is $BUILD_DIR"
+notice `pwd`
+notice "==> mkdir memcached_dir"
+
+mkdir memcached_dir
+cd memcached_dir
+curl http://www.memcached.org/files/memcached-1.4.21.tar.gz -o memcached-1.4.21.tar.gz -L --fail
+tar -xvzf memcached-1.4.21.tar.gz
+cd ..
+
+
 json_empty=true
 if [[ -s "composer.json" ]]; then
     json_empty=false
