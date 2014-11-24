@@ -71,11 +71,24 @@ notice "==> mkdir memcached_dir"
 
 mkdir memcached_dir
 cd memcached_dir
+
+mkdir libevent_install
+curl https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz -o libevent-2.0.21-stable.tar.gz -L --fail
+tar -xvzf libevent-2.0.21-stable.tar.gz
+cd libevent-2.0.21-stable
+./configure --prefix ../libevent_install
+make && make verify && make install
+cd ..
+
+mkdir memcached_install
 curl http://www.memcached.org/files/memcached-1.4.21.tar.gz -o memcached-1.4.21.tar.gz -L --fail
 tar -xvzf memcached-1.4.21.tar.gz
 cd memcached-1.4.21/
-./configure
-cd ../..
+./configure --with-libevent=../libevent_install --prefix ../memcached_install 
+make && make test && make install
+cd ..
+
+cd ..
 
 
 json_empty=true
