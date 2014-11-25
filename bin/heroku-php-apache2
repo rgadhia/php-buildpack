@@ -127,8 +127,7 @@ php -r 'exit((int)version_compare(PHP_VERSION, "5.5.11", "<"));' || { echo "This
 { { httpd -v | php -r 'exit((int)version_compare(preg_replace("#^Server version: Apache/(\S+).+$#sm", "\\1", file_get_contents("php://stdin")), "2.4.10", "<"));'; } || { httpd -t -D DUMP_MODULES | grep 'proxy_handler_module' > /dev/null; }; } || { echo "This program requires mod_proxy_handler for Apache versions before 2.4.10; you may install it from https://gist.github.com/progandy/6ed4eeea60f6277c3e39"; exit 1; }
 
 
-echo "PATH=$HEROKU_APP_DIR/memcached_dir/install/bin memcached -d -vv" >& $HEROKU_APP_DIR/memcached_dir/log.memcached
-
+echo "PATH=$HEROKU_APP_DIR/memcached_dir/install/bin memcached -d -vv >& $HEROKU_APP_DIR/memcached_dir/log.memcached " >&2
 
 
 echo "Booting on port $PORT..." >&2
